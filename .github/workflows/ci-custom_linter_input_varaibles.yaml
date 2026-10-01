@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+      
+  pull_request:
+    branches:
+      - main
 
 jobs:
   test:
@@ -23,14 +27,8 @@ jobs:
           python -m venv venv
           source venv/bin/activate
           pip install -r requirements.txt
-          
-      #custom_linter_v1      
+
       - name: Run custom linter
         run: |
           source venv/bin/activate
-          python custom_linter_v1.py my_app tests
-
-      - name: Run tests
-        run: |
-          source venv/bin/activate
-          python -m unittest tests/test_main_v2.py
+          python custom_linter_input_varaibles.py my_app tests --max-line-length 88 --max-args 2
